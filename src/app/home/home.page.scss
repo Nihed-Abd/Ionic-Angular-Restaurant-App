@@ -1,0 +1,153 @@
+.video-banner {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+  
+    @media (min-width: 768px) {
+      height: 300px;
+    }
+  
+    video {
+      width: 100%;
+      height: auto;
+    }
+  
+    .volume-icon {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      font-size: 30px;
+      color: #fff;
+      background: rgba(0, 0, 0, 0.5);
+      border-radius: 50%;
+      padding: 10px;
+      cursor: pointer;
+    }
+  }
+  
+  .custom-card-deck {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    height: 300px;
+    width: 100%;
+    margin-top: 20px;
+  
+    @media (min-width: 768px) {
+      height: 400px;
+    }
+  
+    @media (min-width: 1024px) {
+      height: 500px;
+    }
+  
+    ion-card {
+      position: absolute;
+      width: 80%;
+      height: 100%;
+      transition: opacity 0.5s, transform 0.5s, box-shadow 0.5s;
+      opacity: 0;
+      transform: scale(0.9);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  
+      &.active {
+        opacity: 1;
+        transform: scale(1);
+        box-shadow: 0 4px 8px rgba(0, 123, 255, 0.6); 
+      }
+  
+      img {
+        width: 100%;
+        height: 200px; 
+        object-fit: cover;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+  
+        @media (min-width: 768px) {
+          height: 250px;
+        }
+  
+        @media (min-width: 1024px) {
+          height: 300px; 
+        }
+      }
+  
+      ion-card-header {
+        background: #fff;
+        padding: 10px;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+        text-align: center;
+      }
+  
+      ion-card-title {
+        font-size: 1.5em;
+        font-weight: bold;
+        color: #333;
+        font-family: 'Roboto', sans-serif; 
+  
+        @media (min-width: 768px) {
+          font-size: 1.8em; 
+        }
+  
+        @media (min-width: 1024px) {
+          font-size: 2em; 
+        }
+      }
+    }
+  }
+  
+  .see-all-button {
+    position: absolute;
+    top: 300px;
+    right: 40px;
+    --background: #007bff; 
+    --color: #fff; 
+    z-index: 10;
+    animation: bounce 1s infinite;
+  
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+      }
+      40% {
+        transform: translateY(-10px);
+      }
+      60% {
+        transform: translateY(-5px);
+      }
+    }
+  }
+  
+  ion-header {
+    --background: #007bff; 
+    ion-toolbar {
+      min-height: 70px; 
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+    ion-title {
+      color: #fff;
+      font-size: 1.8em;
+      flex: 1;
+      text-align: center;
+    }
+  }
+  
+  .background-pattern {
+    background: #fff;
+    box-shadow: -10px 10px 20px rgba(0, 0, 0, 0.1);
+  
+    ion-item {
+      background-color: inherit;
+    }
+  
+    ion-list-header, ion-list {
+      background-color: inherit;
+    }
+  }
+  

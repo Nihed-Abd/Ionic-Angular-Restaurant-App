@@ -1,0 +1,150 @@
+.card {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 20px 0;
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  transform-style: preserve-3d;
+  height: 100%;
+
+  &:hover {
+    transform: translateY(-10px) rotateY(10deg);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+
+  .card-image {
+    width: 100%;
+    height: auto;
+    flex: 1;
+    object-fit: cover; 
+  }
+
+  .card-content {
+    padding: 15px;
+    text-align: center;
+    background-color: #f8f8f8;
+    flex: 0 0 auto;
+
+    h3 {
+      margin: 10px 0;
+      font-size: 1.5em;
+      color: #333;
+    }
+  }
+}
+
+.modal-content {
+  padding: 20px;
+  text-align: center;
+  position: relative;
+  animation: fadeIn 0.3s ease-in-out;
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10%);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  &.fade-out {
+    animation: fadeOut 0.3s ease-in-out forwards;
+
+    @keyframes fadeOut {
+      from {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      to {
+        opacity: 0;
+        transform: translateY(10%);
+      }
+    }
+  }
+
+  .close-icon {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 25px;
+    cursor: pointer;
+    color: white;
+    background: #007bff; 
+    border-radius: 50%;
+    padding: 10px;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .modal-image {
+    width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+  }
+
+  h3 {
+    margin: 10px 0;
+    font-size: 1.5em;
+    color: #333;
+  }
+
+  p {
+    margin: 5px 0;
+    color: #666;
+  }
+
+  ion-button {
+    margin-top: 20px;
+    --background: #007bff; 
+    --color: #fff; 
+  }
+}
+
+ion-header {
+  --background: #007bff;
+
+  ion-toolbar {
+    min-height: 70px; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
+
+  ion-title {
+    color: #fff;
+    font-size: 1.8em; 
+    flex: 1;
+    text-align: center;
+  }
+
+  ion-back-button {
+    color: #fff; 
+    position: absolute;
+    left: 15px;
+  }
+}
+
+.background-pattern {
+  background: #fff;
+  box-shadow: -10px 10px 20px rgba(0, 0, 0, 0.1);
+
+  ion-item {
+    background-color: inherit;
+  }
+
+  ion-list-header, ion-list {
+    background-color: inherit;
+  }
+}
