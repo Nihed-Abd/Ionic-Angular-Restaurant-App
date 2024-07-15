@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -6,49 +6,21 @@ import { Router } from '@angular/router';
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss']
 })
-export class HomePage implements OnInit {
-  products = [
-    {
-      name: 'Pizza Margherita',
-      description: 'Classic pizza with tomatoes and mozzarella',
-      image: 'assets/images/pizza.jpg'
-    },
-    {
-      name: 'Spaghetti Carbonara',
-      description: 'Pasta with eggs, cheese, pancetta, and pepper',
-      image: 'assets/images/SpaghettiCarbonara.jpeg'
-    },
-    {
-      name: 'Tiramisu',
-      description: 'Coffee-flavoured Italian dessert',
-      image: 'assets/images/Tiramisu.jpg'
-    }
-  ];
-
-  activeProduct: any;
-  productIndex: number = 0;
-  isMuted: boolean = true;
-
+export class HomePage {
   constructor(private router: Router) {}
 
-  ngOnInit() {
-    this.startProductRotation();
-  }
+  navigateToPage(page: string) {
+    const container = document.createElement('div');
+    container.classList.add('animation-container');
 
-  startProductRotation() {
-    this.activeProduct = this.products[this.productIndex];
-    setInterval(() => {
-      this.productIndex = (this.productIndex + 1) % this.products.length;
-      this.activeProduct = this.products[this.productIndex];
-    }, 3000);
-  }
+    document.body.appendChild(container);
 
-  navigateToProducts() {
-    this.router.navigate(['/products']);
-  }
+    setTimeout(() => {
+      this.router.navigate(['/products'], { queryParams: { category: page } });
+    }, 1000); // Delay to allow animation to play
 
-  toggleVideoSound(videoElement: HTMLVideoElement) {
-    this.isMuted = !this.isMuted;
-    videoElement.muted = this.isMuted;
+    setTimeout(() => {
+      document.body.removeChild(container);
+    }, 2000); // Remove animation container after it plays
   }
 }

@@ -1,35 +1,26 @@
 <ion-header>
-  <ion-toolbar color="primary">
+  <ion-toolbar style="--background: #162447;">
     <ion-title>Home</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <!-- Video Banner -->
-  <div class="video-banner">
-    <video #videoElement autoplay muted loop>
-      <source src="assets/vds/ads.mp4" type="video/mp4">
-      Your browser does not support the video tag.
-    </video>
-    <ion-icon 
-      [name]="isMuted ? 'volume-mute' : 'volume-high'" 
-      class="volume-icon" 
-      (click)="toggleVideoSound(videoElement)">
-    </ion-icon>
-  </div>
-
-  <!-- Product Cards -->
   <div class="custom-card-deck">
-    <ion-card *ngFor="let product of products" [class.active]="activeProduct === product" class="custom-card" (click)="navigateToProducts()">
-      <img [src]="product.image" />
+    <ion-card class="custom-card" (click)="navigateToPage('drinks')">
+      <div class="card-image-wrapper">
+        <img src="assets/images/drinks.jpeg" />
+      </div>
       <ion-card-header>
-        <ion-card-title>{{ product.name }}</ion-card-title>
+        <ion-card-title class="custom-title">Drinks</ion-card-title>
+      </ion-card-header>
+    </ion-card>
+    <ion-card class="custom-card" (click)="navigateToPage('foods')">
+      <div class="card-image-wrapper">
+        <img src="assets/images/foods.jpeg" />
+      </div>
+      <ion-card-header>
+        <ion-card-title class="custom-title">Foods</ion-card-title>
       </ion-card-header>
     </ion-card>
   </div>
-
-  <!-- See All Button -->
-  <ion-button expand="full" routerLink="/products" class="see-all-button">
-    See All
-  </ion-button>
 </ion-content>

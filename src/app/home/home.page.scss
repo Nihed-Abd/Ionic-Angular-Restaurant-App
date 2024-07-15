@@ -1,153 +1,100 @@
-.video-banner {
-    position: relative;
-    height: 200px;
-    overflow: hidden;
-  
-    @media (min-width: 768px) {
-      height: 300px;
-    }
-  
-    video {
-      width: 100%;
-      height: auto;
-    }
-  
-    .volume-icon {
-      position: absolute;
-      bottom: 20px;
-      right: 20px;
-      font-size: 30px;
-      color: #fff;
-      background: rgba(0, 0, 0, 0.5);
-      border-radius: 50%;
-      padding: 10px;
-      cursor: pointer;
-    }
+/* General Styles */
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-touch-callout: none;
+}
+
+.custom-card-deck {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 20px;
+}
+
+.custom-card {
+  width: 100%;
+  max-width: 300px;
+  position: relative;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  cursor: pointer;
+  overflow: hidden;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  animation: slideUp 0.5s ease-in-out;
+}
+
+.custom-card:hover {
+  transform: translateY(-10px) rotateY(10deg);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.card-image-wrapper {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+}
+
+.card-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease-in-out;
+}
+
+.custom-card:hover .card-image-wrapper img {
+  transform: scale(1.1);
+}
+
+.custom-card ion-card-header {
+  background-color: #f8f8f8;
+  padding: 15px;
+}
+
+.custom-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.5em;
+  color: #333;
+}
+
+@keyframes slideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(100%);
   }
-  
-  .custom-card-deck {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    height: 300px;
-    width: 100%;
-    margin-top: 20px;
-  
-    @media (min-width: 768px) {
-      height: 400px;
-    }
-  
-    @media (min-width: 1024px) {
-      height: 500px;
-    }
-  
-    ion-card {
-      position: absolute;
-      width: 80%;
-      height: 100%;
-      transition: opacity 0.5s, transform 0.5s, box-shadow 0.5s;
-      opacity: 0;
-      transform: scale(0.9);
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  
-      &.active {
-        opacity: 1;
-        transform: scale(1);
-        box-shadow: 0 4px 8px rgba(0, 123, 255, 0.6); 
-      }
-  
-      img {
-        width: 100%;
-        height: 200px; 
-        object-fit: cover;
-        border-top-left-radius: 10px;
-        border-top-right-radius: 10px;
-  
-        @media (min-width: 768px) {
-          height: 250px;
-        }
-  
-        @media (min-width: 1024px) {
-          height: 300px; 
-        }
-      }
-  
-      ion-card-header {
-        background: #fff;
-        padding: 10px;
-        border-bottom-left-radius: 10px;
-        border-bottom-right-radius: 10px;
-        text-align: center;
-      }
-  
-      ion-card-title {
-        font-size: 1.5em;
-        font-weight: bold;
-        color: #333;
-        font-family: 'Roboto', sans-serif; 
-  
-        @media (min-width: 768px) {
-          font-size: 1.8em; 
-        }
-  
-        @media (min-width: 1024px) {
-          font-size: 2em; 
-        }
-      }
-    }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
-  
-  .see-all-button {
-    position: absolute;
-    top: 300px;
-    right: 40px;
-    --background: #007bff; 
-    --color: #fff; 
-    z-index: 10;
-    animation: bounce 1s infinite;
-  
-    @keyframes bounce {
-      0%, 20%, 50%, 80%, 100% {
-        transform: translateY(0);
-      }
-      40% {
-        transform: translateY(-10px);
-      }
-      60% {
-        transform: translateY(-5px);
-      }
-    }
-  }
-  
-  ion-header {
-    --background: #007bff; 
-    ion-toolbar {
-      min-height: 70px; 
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      position: relative;
-    }
-    ion-title {
-      color: #fff;
-      font-size: 1.8em;
-      flex: 1;
-      text-align: center;
-    }
-  }
-  
-  .background-pattern {
-    background: #fff;
-    box-shadow: -10px 10px 20px rgba(0, 0, 0, 0.1);
-  
-    ion-item {
-      background-color: inherit;
-    }
-  
-    ion-list-header, ion-list {
-      background-color: inherit;
-    }
-  }
-  
+}
+
+ion-header {
+  --background: #162447;
+}
+
+ion-toolbar {
+  min-height: 70px; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+ion-title {
+  color: #fff;
+  font-size: 1.8em; 
+  flex: 1;
+  text-align: center;
+}
+
+ion-back-button {
+  color: #fff; 
+  position: absolute;
+  left: 15px;
+}

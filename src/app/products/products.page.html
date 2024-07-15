@@ -1,35 +1,87 @@
 <ion-header>
-  <ion-toolbar color="primary">
+  <ion-toolbar style="--background: #162447;">
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/home" text="" icon="arrow-back-outline"></ion-back-button>
     </ion-buttons>
-    <ion-title>Products</ion-title>
+    <ion-title>{{ selectedCategory }}</ion-title>
   </ion-toolbar>
 </ion-header>
-<ion-content class="background-pattern" style="margin-top: 10px;">
-  <ion-grid>
-    <ion-row>
-      <ion-col size="12" size-md="6" size-lg="4" *ngFor="let product of products">
-        <div class="card" (click)="selectProduct(product)">
-          <img [src]="product.image" alt="{{ product.name }}" class="card-image">
-          <div class="card-content">
-            <h3>{{ product.name }}</h3>
-          </div>
-        </div>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+
+<ion-content class="background-pattern">
+  <video autoplay muted loop class="background-video">
+    <source [src]="videoSource" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+  <br>
+
+  <fieldset id="switch" class="radio">
+    <input checked="" name="switch" id="All" type="radio">
+    <label for="All">All</label>
+    <input name="switch" id="Pizza" type="radio">
+    <label for="Pizza">Pizza</label>
+    <input name="switch" id="Salade" type="radio">
+    <label for="Salade">Salade</label>
+    <input name="switch" id="soups" type="radio">
+    <label for="soups">soups</label>
+    <input name="switch" id="dishes" type="radio">
+    <label for="dishes">dishes</label>
+    <input name="switch" id="traditional" type="radio">
+    <label for="traditional">traditional</label>
+    
+    <input
+    class="input"
+    name="text"
+    type="text"
+    placeholder="Search For {{ selectedCategory }} ..."
+  />
+  </fieldset>
+  <div class="product-container">
+    <div class="product-card" *ngFor="let product of products" (click)="selectProduct(product)">
+      <div class="product-image">
+        <img [src]="product.image" alt="{{ product.name }}" />
+        <div class="category-icon">{{ product.category }}</div>
+      </div>
+      <div class="product-info">
+        <h2>{{ product.name }}</h2>
+        <h3>{{ product.price | currency }}</h3>
+      </div>
+    </div>
+  </div>
 
   <ion-modal [isOpen]="selectedProduct !== null" (didDismiss)="closeModal()">
     <ng-template>
       <ion-content>
-        <div [class.fade-out]="isClosing" class="modal-content">
-          <ion-icon name="close" class="close-icon" (click)="closeModal()"></ion-icon>
-          <img [src]="selectedProduct?.image" alt="{{ selectedProduct?.name }}" class="modal-image">
-          <h3>{{ selectedProduct?.name }}</h3>
-          <p>{{ selectedProduct?.description }}</p>
-          <p>Price: {{ selectedProduct?.price | currency }}</p>
-          <ion-button expand="block" (click)="addToCart(selectedProduct)">Add to Cart</ion-button>
+        <div class="wrapper">
+          <div class="product-img">
+            <img [src]="selectedProduct?.image" alt="{{ selectedProduct?.name }}" />
+          </div>
+          <div class="product-info">
+            <div class="product-text">
+              <h1>{{ selectedProduct?.name }}</h1>
+              <h2>{{ selectedProduct?.category }}</h2>
+              <p>{{ selectedProduct?.description }}</p>
+            </div>
+            <div class="product-price-btn">
+              <p><span>{{ selectedProduct?.price }}</span>$</p>
+              <button class="button" (click)="addToCart(selectedProduct, $event)">
+                <span>Add to cart</span>
+                <svg fill="#fff" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                  <g stroke-width="0" id="SVGRepo_bgCarrier"></g>
+                  <g stroke-linejoin="round" stroke-linecap="round" id="SVGRepo_tracerCarrier"></g>
+                  <g id="SVGRepo_iconCarrier">
+                    <defs></defs>
+                    <g id="cart">
+                      <circle r="1.91" cy="20.59" cx="10.07" class="cls-1"></circle>
+                      <circle r="1.91" cy="20.59" cx="18.66" class="cls-1"></circle>
+                      <path d="M.52,1.5H3.18a2.87,2.87,0,0,1,2.74,2L9.11,13.91H8.64A2.39,2.39,0,0,0,6.25,16.3h0a2.39,2.39,0,0,0,2.39,2.38h10" class="cls-1"></path>
+                      <polyline points="7.21 5.32 22.48 5.32 22.48 7.23 20.57 13.91 9.11 13.91" class="cls-1"></polyline>
+                    </g>
+                  </g>
+                </svg>
+              </button>
+            </div>
+          </div>
+          <ion-icon name="close-circle" class="close-icon" (click)="closeModal()"></ion-icon>
         </div>
       </ion-content>
     </ng-template>
