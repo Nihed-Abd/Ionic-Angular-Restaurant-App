@@ -8,13 +8,14 @@
 .custom-card-deck {
   display: flex;
   justify-content: center;
-  flex-wrap: wrap;
-  padding: 20px;
+  flex-direction: column;
+  align-items: center;
+  padding: 50px;
 }
 
 .custom-card {
   width: 100%;
-  max-width: 300px;
+  max-width: 800px;
   position: relative;
   transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
   cursor: pointer;
@@ -22,7 +23,7 @@
   background-color: #fff;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  margin: 20px;
+  margin: 50px 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -32,12 +33,12 @@
 
 .custom-card:hover {
   transform: translateY(-10px) rotateY(10deg);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2), 0 0 20px rgba(22, 36, 71, 0.6);
 }
 
 .card-image-wrapper {
   width: 100%;
-  height: 200px;
+  height: 400px;
   overflow: hidden;
 }
 
@@ -54,12 +55,12 @@
 
 .custom-card ion-card-header {
   background-color: #f8f8f8;
-  padding: 15px;
+  padding: 20px;
 }
 
 .custom-title {
   font-family: 'Poppins', sans-serif;
-  font-size: 1.5em;
+  font-size: 2em;
   color: #333;
 }
 
@@ -79,22 +80,52 @@ ion-header {
 }
 
 ion-toolbar {
-  min-height: 70px; 
+  min-height: 120px;
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 0 20px rgba(22, 36, 71, 0.6);
 }
 
 ion-title {
   color: #fff;
-  font-size: 1.8em; 
+  font-size: 2.4em;
   flex: 1;
   text-align: center;
 }
 
 ion-back-button {
-  color: #fff; 
+  color: #fff;
   position: absolute;
   left: 15px;
+}
+
+/* Responsive Styles */
+@media (min-width: 768px) {
+  .custom-card {
+    width: 80%;
+  }
+
+  .card-image-wrapper {
+    height: 500px;
+  }
+
+  .custom-title {
+    font-size: 2.5em;
+  }
+}
+
+@media (min-width: 1200px) {
+  .custom-card {
+    width: 70%;
+  }
+
+  .card-image-wrapper {
+    height: 600px;
+  }
+
+  .custom-title {
+    font-size: 3em;
+  }
 }

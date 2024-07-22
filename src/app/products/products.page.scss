@@ -10,24 +10,15 @@ body {
   padding: 20px;
 }
 
-.background-video {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-  object-fit: cover;
-}
-
+/* src/app/products/products.page.scss */
 .product-container {
   display: grid;
   gap: 20px;
-  padding: 20px;
+  padding: 40px;
 }
 
 .product-card {
-  border-radius: 10px;
+  border-radius: 40px;
   overflow: hidden;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s, box-shadow 0.3s;
@@ -37,12 +28,12 @@ body {
 
 .product-card:hover {
   transform: translateY(-10px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 20px 32px #162447;
 }
 
 .product-image {
   width: 100%;
-  height: 200px;
+  height: 300px;
   overflow: hidden;
   position: relative;
   transition: transform 0.3s ease;
@@ -56,7 +47,7 @@ body {
 }
 
 .product-card:hover .product-image img {
-  transform: scale(1.1);
+  transform: scale(1.5);
 }
 
 .category-icon {
@@ -66,31 +57,64 @@ body {
   background-color: #162447;
   color: white;
   border-radius: 50%;
-  padding: 10px;
-  font-size: 12px;
+  padding: 20px;
+  font-size: 16px;
   font-weight: 700;
   text-align: center;
 }
 
+.discount-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: red;
+  color: white;
+  padding:  20px 40px;
+  border-radius: 5px;
+  font-size: 2  8px;
+  font-weight: bold;
+  animation: bounce 1s infinite;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
 .product-info {
-  padding: 15px;
+  padding: 20px;
   text-align: center;
 }
 
 .product-info h2 {
-  font-size: 1.5em;
+  font-size: 2em;
   font-weight: 700;
   margin: 10px 0;
   color: #333;
 }
 
-.product-info p {
-  font-size: 1em;
-  color: #666;
+.price-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.original-price {
+  font-size: 1.5em;
+  color: red;
+  text-decoration: line-through;
 }
 
 .product-info h3 {
-  font-size: 1.5em;
+  font-size: 2em;
   font-weight: 700;
   color: #162447;
   margin-top: 10px;
@@ -119,7 +143,7 @@ ion-header {
 }
 
 ion-toolbar {
-  min-height: 70px;
+  min-height: 120px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -128,7 +152,7 @@ ion-toolbar {
 
 ion-title {
   color: #fff;
-  font-size: 1.8em;
+  font-size: 2.4em;
   flex: 1;
   text-align: center;
 }
@@ -136,7 +160,8 @@ ion-title {
 ion-back-button {
   color: #fff;
   position: absolute;
-  left: 15px;
+  left: 25px;
+  font-size: 2.4em;
 }
 
 /* Modal styles */
@@ -144,19 +169,26 @@ ion-back-button {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column; /* Make the content stack vertically on small screens */
+  flex-direction: column;
   padding: 20px;
-  background: #fff;
+  background: rgba(255, 255, 255, 0.95);
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  width: 100%; /* Adjust width as necessary */
-  height: 100%; /* Adjust height as necessary */
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  animation: fadeIn 0.5s ease-in-out;
+  backdrop-filter: blur(10px);
 }
 
 .product-img {
-  width: 100%; /* Ensure the image takes full width on small screens */
-  height: 200px;
+  width: 100%;
+  height: 500px;
   overflow: hidden;
+  border-radius: 10px;
 }
 
 .product-img img {
@@ -169,25 +201,41 @@ ion-back-button {
 .product-info {
   flex: 1;
   padding: 20px;
-  text-align: center; /* Center text on small screens */
+  text-align: center;
 }
 
 .product-text h1 {
-  font-size: 24px;
+  font-size: 32px;
   font-weight: 700;
   margin-bottom: 20px;
   color: #162447;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.product-text h1::before {
+  content: '🍽️';
+  margin-right: 10px;
 }
 
 .product-text h2 {
-  font-size: 18px;
+  font-size: 30px;
   font-weight: 600;
   color: #666;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.product-text h2::before {
+  content: '🔥';
+  margin-right: 15px;
 }
 
 .product-text p {
-  font-size: 16px;
+  font-size: 30px;
   color: #666;
   line-height: 1.5em;
 }
@@ -200,17 +248,25 @@ ion-back-button {
 }
 
 .product-price-btn p {
-  font-size: 24px;
+  font-size: 35px;
   font-weight: 700;
   color: #162447;
   margin-right: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.product-price-btn p::before {
+  content: '💰';
+  margin-right: 10px;
 }
 
 .product-price-btn .button {
-  height: 60px;
-  width: 200px;
+  height: 80px;
+  width: 300px;
   background-color: #162447;
-  border: 2px solid #b68080;
+  border: 2px solid #7591d8;
   color: #eee;
   transition: 0.6s;
   font-size: 15px;
@@ -251,16 +307,16 @@ ion-back-button {
 
 .close-icon {
   position: absolute;
-  top: 20px;
-  right: 20px;
-  font-size: 25px;
+  top: 30px;
+  left: 30px;
+  font-size: 35px;
   cursor: pointer;
   color: white;
   background: #162447;
   border-radius: 50%;
-  padding: 10px;
-  width: 30px;
-  height: 30px;
+  padding: 15px;
+  width: 60px;
+  height: 60px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -272,11 +328,63 @@ ion-back-button {
   background: #1e3a5f;
 }
 
-@media (min-width: 1000px) {
+/* Tablet and larger screens */
+@media (min-width: 768px) {
   .wrapper {
-    flex-direction: row; /* Revert to horizontal layout on larger screens */
+    flex-direction: column;
+  }
+  .product-img {
+    height: 800px; /* Increase height for tablets */
+  }
+  .product-text h1 {
+    font-size: 25px;
+  }
+  .product-text h2 {
+    font-size: 32px;
+  }
+  .product-text p {
+    font-size: 28px;
   }
 }
+
+@media (min-width: 900px) {
+  .wrapper {
+    width: 100%;
+    height: 100%;
+  }
+  .product-img {
+    height: 800px; /* Increase height for larger screens */
+  }
+  .product-text h1 {
+    font-size: 20px;
+  }
+  .product-text h2 {
+    font-size: 36px;
+  }
+  .product-text p {
+    font-size: 32px;
+  }
+}
+
+@media (min-width: 2000px) {
+  .wrapper {
+    width: 100%;
+    height: 100%;
+  }
+  .product-img {
+    height: 1000px; /* Increase height for very large screens */
+  }
+  .product-text h1 {
+    font-size: 56px;
+  }
+  .product-text h2 {
+    font-size: 44px;
+  }
+  .product-text p {
+    font-size: 40px;
+  }
+}
+
 .input {
   width: 100%;
   max-width: 270px;
@@ -337,10 +445,12 @@ ion-back-button {
 .input:valid {
   animation: typing 2s steps(30, end);
 }
+
 .input-container {
   position: relative;
   width: 100%;
   max-width: 270px;
+  margin: auto;
 }
 
 .input {
@@ -488,6 +598,9 @@ ion-back-button {
 
 fieldset {
   border: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 /* Hide default radio */
@@ -506,14 +619,21 @@ fieldset {
   cursor: pointer;
   border-radius: 20px;
   color: #1e3a5f;
-  margin: 0px 5px;
+  margin: 5px;
   font-weight: 600;
   text-transform: uppercase;
+  border: 2px solid transparent;
+  transition: border 0.3s ease;
 }
 
-.radio label, .radio label::before {
-  -webkit-transition: .25s all ease;
-  transition: .25s all ease;
+.radio label:hover {
+  border: 2px solid #1e3a5f;
+}
+
+.radio label,
+.radio label::before {
+  -webkit-transition: 0.25s all ease;
+  transition: 0.25s all ease;
 }
 
 .radio label::before {
@@ -531,7 +651,6 @@ fieldset {
 .radio input[type="radio"] + label::before {
   border-radius: 1em;
 }
-
 
 /* Checked toggle */
 .radio input[type="radio"]:checked + label {
@@ -554,4 +673,68 @@ fieldset {
 .radio:hover input[type="radio"]:checked + label {
   -webkit-box-shadow: #2195f338 0px 0px 0px 25px;
   box-shadow: #2195f338 0px 0px 0px 25px;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -60%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
+
+/* Responsive styles */
+@media (max-width: 720px) {
+  .wrapper {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+@media (max-width: 1200px) {
+  .wrapper {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+@media (min-width: 1200px) and (max-width: 2000px) {
+  .wrapper {
+    width: 100%;
+    height: 100%;
+  }
+  .product-img {
+    height: 800px;
+  }
+  .product-text h1 {
+    font-size: 48px;
+  }
+  .product-text h2 {
+    font-size: 36px;
+  }
+  .product-text p {
+    font-size: 32px;
+  }
+}
+
+@media (min-width: 2000px) {
+  .wrapper {
+    width: 100%;
+    height: 100%;
+  }
+  .product-img {
+    height: 1000px;
+  }
+  .product-text h1 {
+    font-size: 56px;
+  }
+  .product-text h2 {
+    font-size: 44px;
+  }
+  .product-text p {
+    font-size: 40px;
+  }
 }

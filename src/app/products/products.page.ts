@@ -11,10 +11,12 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ProductsPage implements OnInit {
   products: Product[] = [];
+  filteredProducts: Product[] = [];
   selectedProduct: Product | null = null;
   isClosing: boolean = false;
   selectedCategory!: 'drinks' | 'foods';
   videoSource!: string;
+  searchQuery: string = '';
 
   constructor(
     private productsService: ProductsService,
@@ -25,9 +27,24 @@ export class ProductsPage implements OnInit {
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
       this.selectedCategory = params['category'] as 'drinks' | 'foods';
-      this.products = this.productsService.getProductsByCategory(this.selectedCategory);
-      this.videoSource = this.selectedCategory === 'drinks' ? 'assets/videos/bubbles.mp4' : 'assets/videos/smoke.mp4';
+      this.loadProducts();
+      this.videoSource = this.selectedCategory === 'drinks' ? 'assets/vds/bubbles.mp4' : 'assets/vds/smoke.mp4';
     });
+  }
+
+  loadProducts() {
+    this.products = this.productsService.getProductsByCategory(this.selectedCategory);
+    this.filteredProducts = this.products;
+  }
+
+  filterProducts() {
+    if (this.searchQuery) {
+      this.filteredProducts = this.products.filter(product =>
+        product.name.toLowerCase().includes(this.searchQuery.toLowerCase())
+      );
+    } else {
+      this.filteredProducts = this.products;
+    }
   }
 
   selectProduct(product: Product) {
@@ -40,6 +57,11 @@ export class ProductsPage implements OnInit {
     setTimeout(() => {
       this.selectedProduct = null;
     }, 300);
+  }
+
+  getProductPrice(product: Product | null): string {
+    if (!product) return '';
+    return product.priceDiscount > 0 ? `${product.priceDiscount}` : `${product.price}`;
   }
 
   async addToCart(product: Product | null, event: any) {
