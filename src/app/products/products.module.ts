@@ -12,6 +12,7 @@ import { ProductsPage } from './products.page';
     FormsModule,
     IonicModule,
     ProductsPageRoutingModule
+    
   ],
   declarations: [ProductsPage]
 })
