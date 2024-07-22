@@ -1,3 +1,4 @@
+<!-- src/app/products/products.page.html -->
 <ion-header>
   <ion-toolbar style="--background: #162447;">
     <ion-buttons slot="start">
@@ -8,12 +9,7 @@
 </ion-header>
 
 <ion-content class="background-pattern">
-  <video autoplay muted loop class="background-video">
-    <source [src]="videoSource" type="video/mp4">
-    Your browser does not support the video tag.
-  </video>
   <br>
-
   <fieldset id="switch" class="radio">
     <input checked="" name="switch" id="All" type="radio">
     <label for="All">All</label>
@@ -29,21 +25,27 @@
     <label for="traditional">traditional</label>
     
     <input
-    class="input"
-    name="text"
-    type="text"
-    placeholder="Search For {{ selectedCategory }} ..."
-  />
+      class="input"
+      name="text"
+      type="text"
+      placeholder="Search For {{ selectedCategory }} ..."
+      [(ngModel)]="searchQuery"
+      (input)="filterProducts()"
+    />
   </fieldset>
   <div class="product-container">
-    <div class="product-card" *ngFor="let product of products" (click)="selectProduct(product)">
+    <div class="product-card" *ngFor="let product of filteredProducts" (click)="selectProduct(product)">
       <div class="product-image">
         <img [src]="product.image" alt="{{ product.name }}" />
         <div class="category-icon">{{ product.category }}</div>
+        <div *ngIf="product.hasDiscount" class="discount-badge">Sale</div>
       </div>
       <div class="product-info">
         <h2>{{ product.name }}</h2>
-        <h3>{{ product.price | currency }}</h3>
+        <div class="price-container">
+          <h3 *ngIf="product.hasDiscount" class="original-price">{{ product.price | currency }}</h3>
+          <h3>{{ product.priceDiscount > 0 ? (product.priceDiscount | currency) : (product.price | currency) }}</h3>
+        </div>
       </div>
     </div>
   </div>
@@ -54,6 +56,7 @@
         <div class="wrapper">
           <div class="product-img">
             <img [src]="selectedProduct?.image" alt="{{ selectedProduct?.name }}" />
+            <div *ngIf="selectedProduct?.hasDiscount" class="discount-badge">Sale</div>
           </div>
           <div class="product-info">
             <div class="product-text">
@@ -62,7 +65,11 @@
               <p>{{ selectedProduct?.description }}</p>
             </div>
             <div class="product-price-btn">
-              <p><span>{{ selectedProduct?.price }}</span>$</p>
+              <p>
+                <span>
+                  {{ selectedProduct ? getProductPrice(selectedProduct) : '' | currency }}
+                </span>
+              </p>
               <button class="button" (click)="addToCart(selectedProduct, $event)">
                 <span>Add to cart</span>
                 <svg fill="#fff" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
